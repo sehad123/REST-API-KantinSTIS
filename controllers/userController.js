@@ -247,34 +247,34 @@ exports.addBalance = (id, addedBalance) =>
       .findById(id)
       .then((user) => {
         if (user) {
-          const currentBalance = user.saldo || 0; // Ambil saldo saat ini, jika tidak ada, gunakan 0
-          const newBalance = currentBalance + addedBalance; // Hitung saldo baru
+          const currentBalance = user.saldo || 0;
+          const newBalance = currentBalance + addedBalance;
 
           userModel
             .findByIdAndUpdate(id, { $set: { saldo: newBalance } })
             .then(() =>
               resolve({
-                sukses: true,
-                msg: `Saldo berhasil ditambahkan. Saldo sekarang: ${newBalance}`,
+                success: true,
+                message: `Saldo berhasil ditambahkan. Saldo sekarang: ${newBalance}`,
               })
             )
             .catch(() =>
               reject({
-                sukses: false,
-                msg: "Gagal menambah saldo",
+                success: false,
+                message: "Gagal menambah saldo",
               })
             );
         } else {
           reject({
-            sukses: false,
-            msg: "User tidak ditemukan",
+            success: false,
+            message: "User tidak ditemukan",
           });
         }
       })
       .catch(() =>
         reject({
-          sukses: false,
-          msg: "Terjadi kesalahan pada server",
+          success: false,
+          message: "Terjadi kesalahan pada server",
         })
       );
   });
@@ -283,7 +283,7 @@ exports.addBalance = (id, addedBalance) =>
 exports.updateBalance = (id, data) =>
   new Promise((resolve, reject) => {
     userModel
-      .updateOne({ _id: id }, { $set: data })
+      .findByIdAndUpdate(id, { $set: data })
       .then(() => {
         resolve({
           sukses: true,

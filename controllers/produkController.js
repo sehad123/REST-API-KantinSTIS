@@ -22,7 +22,7 @@ exports.create = (data) =>
 exports.updateQty = (id, data) =>
   new Promise((resolve, reject) => {
     produkModel
-      .updateOne({ _id: id }, { $set: data })
+      .findByIdAndUpdate(id, data)
       .then(() =>
         resolve({
           sukses: true,

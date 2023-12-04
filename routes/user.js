@@ -52,14 +52,17 @@ router.put("/change-password/:id", (req, res) => {
 });
 
 // Route untuk menambah saldo
-router.put("/add-balance/:id", (req, res) => {
-  const { id } = req.params;
-  const { saldo } = req.body;
+router.put("/add-balance/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { addedBalance } = req.body;
 
-  userController
-    .tambahSaldo(id, saldo)
-    .then((result) => res.json(result))
-    .catch((err) => res.json(err));
+    const result = await userController.addBalance(id, addedBalance);
+
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 // Endpoint untuk mengedit data user berdasarkan ID
