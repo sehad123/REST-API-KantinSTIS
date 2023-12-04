@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const mongoUrl = "mongodb://127.0.0.1:27017/tokogitar1";
+const mongoUrl = "mongodb://127.0.0.1:27017/kantinstis";
 const cors = require("cors");
 const path = require("path");
 
@@ -26,7 +26,7 @@ const directory = path.join(__dirname, "/static/");
 app.use(express.static(directory));
 
 app.use("/user", require("./routes/user"));
-app.use("/gitar", require("./routes/gitar"));
+app.use("/produk", require("./routes/produk"));
 app.use("/transaksi", require("./routes/transaksi"));
 
 app.listen(5001, () => {
