@@ -278,3 +278,22 @@ exports.addBalance = (id, addedBalance) =>
         })
       );
   });
+
+// Method untuk mengupdate saldo pengguna berdasarkan ID
+exports.updateBalance = (id, data) =>
+  new Promise((resolve, reject) => {
+    userModel
+      .updateOne({ _id: id }, { $set: data })
+      .then(() => {
+        resolve({
+          sukses: true,
+          msg: "Berhasil Update saldo",
+        });
+      })
+      .catch(() => {
+        reject({
+          sukses: false,
+          msg: "Gagal update saldo",
+        });
+      });
+  });

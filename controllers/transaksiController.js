@@ -45,7 +45,7 @@ exports.getall = () =>
         .aggregate([
           {
             $lookup: {
-              from: "gitars",
+              from: "produks",
               localField: "idBarang",
               foreignField: "_id",
               as: "dataBarang",
@@ -81,7 +81,7 @@ exports.getByIdUser = (id) =>
         .aggregate([
           {
             $lookup: {
-              from: "gitars",
+              from: "produks",
               localField: "idBarang",
               foreignField: "_id",
               as: "dataBarang",
@@ -123,7 +123,7 @@ exports.getByIdUserLimit = (id, limit) =>
         .aggregate([
           {
             $lookup: {
-              from: "gitars",
+              from: "produks",
               localField: "idBarang",
               foreignField: "_id",
               as: "dataBarang",

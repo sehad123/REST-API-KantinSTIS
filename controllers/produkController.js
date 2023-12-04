@@ -19,6 +19,24 @@ exports.create = (data) =>
       });
   });
 
+exports.updateQty = (id, data) =>
+  new Promise((resolve, reject) => {
+    produkModel
+      .updateOne({ _id: id }, { $set: data })
+      .then(() =>
+        resolve({
+          sukses: true,
+          msg: "Berhasil Update Qty Produk",
+        })
+      )
+      .catch(() =>
+        reject({
+          sukses: false,
+          msg: "Gagal Update Qty Produk",
+        })
+      );
+  });
+
 exports.getData = () =>
   new Promise((resolve, reject) => {
     produkModel

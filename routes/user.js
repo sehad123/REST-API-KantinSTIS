@@ -1,20 +1,3 @@
-// const router = require('express').Router()
-// const userController = require('../controllers/userController')
-
-// router.post('/register', (req,res) => {
-//     userController.register(req.body)
-//         .then(result => res.json(result))
-//         .catch(err => res.json(err))
-// })
-
-// router.post('/login', (req,res) => {
-//     userController.login(req.body)
-//         .then(result => res.json(result))
-//         .catch(err => res.json(err))
-// })
-
-// module.exports = router
-
 const router = require("express").Router();
 const userController = require("../controllers/userController");
 const uploadConfig = require("../uploadConfig");
@@ -85,6 +68,17 @@ router.put("/:id", (req, res) => {
   const newData = req.body;
   userController
     .edit(id, newData)
+    .then((result) => res.json(result))
+    .catch((err) => res.json(err));
+});
+
+// Route untuk mengupdate saldo pengguna berdasarkan ID
+router.put("/update-balance/:id", (req, res) => {
+  const id = req.params.id;
+  const data = req.body;
+
+  userController
+    .updateBalance(id, data)
     .then((result) => res.json(result))
     .catch((err) => res.json(err));
 });
