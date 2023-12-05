@@ -1,3 +1,4 @@
+const produk = require("../models/produk");
 const produkModel = require("../models/produk");
 
 exports.create = (data) =>
@@ -19,22 +20,26 @@ exports.create = (data) =>
       });
   });
 
-exports.updateQty = (id, data) =>
+exports.updateQty = (id, stock) =>
   new Promise((resolve, reject) => {
-    produkModel
-      .findByIdAndUpdate(id, data)
-      .then(() =>
-        resolve({
-          sukses: true,
-          msg: "Berhasil Update Qty Produk",
-        })
-      )
-      .catch(() =>
-        reject({
-          sukses: false,
-          msg: "Gagal Update Qty Produk",
-        })
-      );
+    produkModel.findById(id).then((res) => {
+      const currentQty = res.qty || 0;
+      const newQty = currentQty - stock;
+      produkModel
+        .findByIdAndUpdate(id, { $set: { qty: newQty } })
+        .then(() =>
+          resolve({
+            sukses: true,
+            msg: "Berhasil Update Qty Produk",
+          })
+        )
+        .catch(() =>
+          reject({
+            sukses: false,
+            msg: "Gagal Update Qty Produk",
+          })
+        );
+    });
   });
 
 exports.getData = () =>

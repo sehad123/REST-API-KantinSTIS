@@ -54,14 +54,16 @@ router.delete("/hapus/:id", (req, res) => {
 });
 
 // Route baru untuk update qty
-router.put("/updateqty/:id", (req, res) => {
-  const id = req.params.id;
-  const data = req.body;
+router.put("/updateqty/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { stock } = req.body;
 
-  produkController
-    .updateQty(id, data)
-    .then((result) => res.json(result))
-    .catch((err) => res.json(err));
+    const result = await produkController.updateQty(id, stock);
+
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
-
 module.exports = router;
