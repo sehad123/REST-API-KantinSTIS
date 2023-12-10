@@ -23,6 +23,13 @@ router.put("/upload-foto/:id", fields, (req, res) => {
     .catch((err) => res.json(err));
 });
 
+router.get("/", (req, res) => {
+  userController
+    .getAllUsers()
+    .then((result) => res.json(result))
+    .catch((err) => res.json(err));
+});
+
 router.delete("/delete-foto/:id", async (req, res) => {
   const { id } = req.params;
 

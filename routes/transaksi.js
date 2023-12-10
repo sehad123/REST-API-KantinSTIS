@@ -28,7 +28,7 @@ router.put("/upload-bukti/:id", fields, (req, res) => {
 
 router.get("/getall", (req, res) => {
   transaksiController
-    .getall()
+    .gettrans()
     .then((result) => res.json(result))
     .catch((err) => res.json(err));
 });

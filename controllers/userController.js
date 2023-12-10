@@ -1,6 +1,26 @@
 const userModel = require("../models/user");
 const bcrypt = require("bcrypt");
 
+exports.getAllUsers = () =>
+  new Promise((resolve, reject) => {
+    userModel
+      .find({})
+      .then((res) => {
+        resolve({
+          sukses: true,
+          msg: "Berhasil Mengambil Data",
+          data: res,
+        });
+      })
+      .catch(() =>
+        reject({
+          sukses: false,
+          msg: "Gagal Mengmabil Data",
+          data: [],
+        })
+      );
+  });
+
 exports.deleteProfilePicture = (id) =>
   new Promise((resolve, reject) => {
     userModel

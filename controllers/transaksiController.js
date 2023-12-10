@@ -37,6 +37,25 @@ exports.uploadBuktiBayar = (id, data) =>
         });
       });
   });
+exports.gettrans = () =>
+  new Promise((resolve, reject) => {
+    transaksiModel
+      .find({})
+      .then((res) => {
+        resolve({
+          sukses: true,
+          msg: "Berhasil Mengambil Data",
+          data: res,
+        });
+      })
+      .catch(() =>
+        reject({
+          sukses: false,
+          msg: "Gagal Mengmabil Data",
+          data: [],
+        })
+      );
+  });
 
 exports.getall = () =>
   new Promise((resolve, reject) => {
